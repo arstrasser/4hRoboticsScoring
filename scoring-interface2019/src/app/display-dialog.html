@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Display Scores</h1>
+<mat-dialog-content>
+  Are you sure you would like to display these scores?<br>
+  Blue: {{blue}}<br>
+  Red: {{red}}
+</mat-dialog-content>
+<div mat-dialog-actions>
+  <button mat-button [mat-dialog-close]="false">Cancel</button>
+  <button mat-raised-button [mat-dialog-close]="true">Yes</button>
+</div>

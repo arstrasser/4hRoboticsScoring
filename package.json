@@ -1,0 +1,17 @@
+{
+  "name": "4hrobotics2019",
+  "version": "1.0.0",
+  "description": "Somerset County 4-H Robotics Competition Server",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alex Strasser",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "opencv4nodejs": "^5.1.0",
+    "serve-favicon": "^2.5.0"
+  }
+}
