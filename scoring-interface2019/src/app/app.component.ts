@@ -29,14 +29,14 @@ const initialScore = {
 export class AppComponent {
   title = 'scoring-interface2019';
   autoMode = true;
-  score = initialScore;
+  score = JSON.parse(JSON.stringify(initialScore));
 
   constructor(private http:HttpClient, private dialog:MatDialog, private snack:MatSnackBar){
   }
 
   clear() {
     if(window.confirm("Are you sure you would like to clear?")){
-      this.score = initialScore;
+      this.score = JSON.parse(JSON.stringify(initialScore));
       this.autoMode = true;
     }
   }

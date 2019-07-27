@@ -112,11 +112,11 @@ let AppComponent = class AppComponent {
         this.snack = snack;
         this.title = 'scoring-interface2019';
         this.autoMode = true;
-        this.score = initialScore;
+        this.score = JSON.parse(JSON.stringify(initialScore));
     }
     clear() {
         if (window.confirm("Are you sure you would like to clear?")) {
-            this.score = initialScore;
+            this.score = JSON.parse(JSON.stringify(initialScore));
             this.autoMode = true;
         }
     }
