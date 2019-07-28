@@ -84,11 +84,11 @@ let updateDisplay = () => {
   }
 
   if (displayMode == 2) {
-    const mat = cv.imread('./media/score-bg.png');
+    const mat = cv.imread('./media/score-bg2.png');
     mat.putText(
       ""+scores.red,
       //300 for 1 digit
-      new cv.Point(340-(45*numDigits(scores.red)),450),
+      new cv.Point(190-(45*numDigits(scores.red)), 410),
       cv.FONT_HERSHEY_SIMPLEX,
       5, //font size
       new cv.Vec(255,255,255),
@@ -98,7 +98,7 @@ let updateDisplay = () => {
     )
     mat.putText(
       ""+scores.blue,
-      new cv.Point(910-(45*numDigits(scores.blue)),450),
+      new cv.Point(760-(45*numDigits(scores.blue)),410),
       cv.FONT_HERSHEY_SIMPLEX,
       5, //font size
       new cv.Vec(255,255,255),
@@ -109,7 +109,13 @@ let updateDisplay = () => {
     frame = mat;
   }
 
-  frame = frame.resize(Math.floor(frame.rows/frame.cols*1024), 1024, cv.INTER_AREA)
+  if(displayMode == 1){
+    frame = frame.resize(768, Math.floor(frame.cols/frame.rows*768), cv.INTER_AREA)
+  }else {
+    frame = frame.resize(Math.floor(frame.rows/frame.cols*1024), 1024, cv.INTER_AREA)
+  }
+
+
   cv.imshow('view', frame);
   cv.waitKey(wait);
   setTimeout(updateDisplay, wait)
