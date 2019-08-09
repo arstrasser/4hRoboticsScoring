@@ -152,11 +152,11 @@ let AppComponent = class AppComponent {
     }
     autoTotal() {
         return this.cityTotal(true) + this.score.auto.turningJunc * 4 + this.score.auto.contJunc * 3 +
-            this.score.auto.mountain * 2;
+            this.score.auto.mountain * 3;
     }
     teleTotal() {
         return this.cityTotal(false) + this.score.tele.turningJunc * 4 + this.score.tele.contJunc * 3 +
-            this.score.tele.forest * 3 + this.score.tele.mountain * 2;
+            this.score.tele.forest * 3 + this.score.tele.mountain * 3;
     }
     totalScore() {
         return this.autoTotal() + this.teleTotal() - this.score.tele.touch * 2;

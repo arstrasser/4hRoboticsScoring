@@ -4,7 +4,7 @@ const logger = require('morgan');
 const cv = require('opencv4nodejs');
 const path = require('path');
 
-const devicePort = 0;
+const devicePort = 1;
 const camera = new cv.VideoCapture(devicePort);
 
 const redVideo = new cv.VideoCapture('./media/red.mp4');
@@ -30,7 +30,7 @@ app.get('/currentScores', (req, res) => {
 })
 
 app.get('/updateScores', (req, res) => {
-  let newScore = req.query.score;
+  let newScore = parseInt(req.query.score);
   let team = req.query.color;
   if (!scores.hasOwnProperty(team)){
     res.status(400).send("That color doesn't exist!");
@@ -41,14 +41,6 @@ app.get('/updateScores', (req, res) => {
 
 app.get('/publish', (req, res) => {
   displayMode = 1;
-  setTimeout(() => {
-    displayMode = 0;
-    redVideo.reset();
-    blueVideo.reset();
-    tieVideo.reset();
-    scores.blue = 0;
-    scores.red = 0;
-  }, 15000);
   res.status(200).json({"status":"Success"});
 })
 
@@ -70,7 +62,6 @@ let updateDisplay = () => {
 
   if(displayMode == 1){
     wait = 5;
-    let done = false;
     if(scores.red > scores.blue){
       frame = redVideo.read();
     }else if (scores.blue > scores.red){
@@ -79,16 +70,24 @@ let updateDisplay = () => {
       frame = tieVideo.read();
     }
     if(frame.empty){
+      redVideo.reset();
+      blueVideo.reset();
+      tieVideo.reset();
       displayMode = 2;
+      setTimeout(() => {
+        displayMode = 0;
+        scores.blue = 0;
+        scores.red = 0;
+      }, 7000);
     }
   }
 
   if (displayMode == 2) {
     const mat = cv.imread('./media/score-bg2.png');
     mat.putText(
-      ""+scores.red,
+      ""+scores.blue,
       //300 for 1 digit
-      new cv.Point(190-(45*numDigits(scores.red)), 410),
+      new cv.Point(190-(45*numDigits(scores.blue)), 410),
       cv.FONT_HERSHEY_SIMPLEX,
       5, //font size
       new cv.Vec(255,255,255),
@@ -97,8 +96,8 @@ let updateDisplay = () => {
       0
     )
     mat.putText(
-      ""+scores.blue,
-      new cv.Point(760-(45*numDigits(scores.blue)),410),
+      ""+scores.red,
+      new cv.Point(760-(45*numDigits(scores.red)),410),
       cv.FONT_HERSHEY_SIMPLEX,
       5, //font size
       new cv.Vec(255,255,255),
@@ -117,8 +116,8 @@ let updateDisplay = () => {
 
 
   cv.imshow('view', frame);
-  cv.waitKey(wait);
-  setTimeout(updateDisplay, wait)
+  cv.waitKey(1);
+  setTimeout(updateDisplay, 1000/30)
 };
 
 updateDisplay();
