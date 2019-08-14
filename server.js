@@ -107,7 +107,7 @@ let updateDisplay = () => {
     )
     frame = mat;
   }
-
+  if(!frame.empty){
   if(displayMode == 1){
     frame = frame.resize(768, Math.floor(frame.cols/frame.rows*768), cv.INTER_AREA)
   }else {
@@ -117,6 +117,7 @@ let updateDisplay = () => {
 
   cv.imshow('view', frame);
   cv.waitKey(1);
+}
   setTimeout(updateDisplay, 1000/30)
 };
 
