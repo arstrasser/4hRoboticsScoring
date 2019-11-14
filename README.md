@@ -7,15 +7,15 @@ Developed by Alex Strasser 2019
 This scoring system was developed to help run 4-H robotics challenges at the Somerset County 4-H fair each year. It allows for live webcam/score display on a projector and referee scoring on mobile phones.
 
 This system consists of 3 components:
-- A webserver
-- A mobile application
-- A webcam display on the server
+- A mobile application (website)
+- A webcam display on the server (opencv)
+- A webserver (to tie everything together)
 
-The webserver was coded using Express to run on a Node.js server. It uses the [opencv4nodejs](https://github.com/justadudewhohacks/opencv4nodejs) to display current webcam views in a window on the server. The server also hosts a compiled angular app that can be accessed by phones on the same network as the server.
+The webserver was coded using [Express](https://expressjs.com/) to run on a Node.js webserver. It uses the [opencv4nodejs](https://github.com/justadudewhohacks/opencv4nodejs) to display current webcam views in a window on the server. The server also hosts a compiled angular app that can be accessed by phones on the same network as the server.
 
 The webserver and webcam code is stored in server.js
 
-The mobile web app code is stored in scoring-interface2019 in an [Angular](https://angular.io/) project. Every time this code is updated, run `npm build` and reload the server to update everything.
+The mobile web app code is stored in /scoring-interface2019 in an [Angular](https://angular.io/) project. Every time this code is updated, run `ng build` and reload the server to update everything.
 
 ### Setup
 
