@@ -9,7 +9,7 @@
   "author": "Alex Strasser",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "morgan": "^1.9.1",
     "opencv4nodejs": "^5.1.0",
     "serve-favicon": "^2.5.0",
